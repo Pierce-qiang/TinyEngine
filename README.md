@@ -1,2 +1,2 @@
 # TinyEngine
-A tiny game engine based on opengl
+A tiny game engine based on opengl (building framework)

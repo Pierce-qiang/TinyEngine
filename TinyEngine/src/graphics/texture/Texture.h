@@ -65,7 +65,7 @@ namespace TEngine {
 		GLenum mTextureTarget;
 		unsigned int mTextureId;
 		unsigned int mWidth, mHeight;
-		unsigned int channel;
+		//unsigned int channel;  which is actually data type in struct Texture setting
 
 		TextureSettings mTextureSettings;
 	};

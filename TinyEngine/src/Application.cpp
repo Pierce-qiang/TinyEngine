@@ -4,7 +4,9 @@
 #include <iostream>
 #include "platform/window/InputManager.h"
 #include "platform/window/WindowManager.h"
+#include "graphics/texture/TextureLoader.h"
 
+using namespace TEngine;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -129,7 +131,7 @@ int main()
 
     // uncomment this call to draw in wireframe polygons.
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+    TextureLoader::InitDefaultTextures();
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))

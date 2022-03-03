@@ -4,7 +4,6 @@ namespace TEngine {
 	Texture::Texture(const TextureSettings& settings /*= TextureSettings()*/) :
 		mTextureId(0), mTextureTarget(0), mWidth(0), mHeight(0), mTextureSettings(settings)
 	{
-
 	}
 
 	Texture::~Texture()

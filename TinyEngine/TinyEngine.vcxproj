@@ -159,14 +159,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Skybox.cpp" />
+    <ClCompile Include="src\platform\opengl\GBuffer.cpp" />
+    <ClCompile Include="src\platform\opengl\FrameBuffer.cpp" />
+    <ClCompile Include="src\graphics\texture\Cubemap.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="src\graphics\texture\Texture.cpp" />
+    <ClCompile Include="src\graphics\texture\TextureLoader.cpp" />
     <ClCompile Include="vendor\glad.c" />
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Skybox.h" />
+    <ClInclude Include="src\platform\opengl\GBuffer.h" />
+    <ClInclude Include="src\platform\opengl\FrameBuffer.h" />
+    <ClInclude Include="src\graphics\texture\Cubemap.h" />
     <ClInclude Include="src\macros.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="src\graphics\texture\Texture.h" />
+    <ClInclude Include="src\graphics\texture\TextureLoader.h" />
     <ClInclude Include="vendor\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
