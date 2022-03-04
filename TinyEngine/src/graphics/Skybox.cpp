@@ -33,7 +33,7 @@ namespace TEngine {
 		mSkyboxShader->SetUniform("skybox", 0);
 
 		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
+		glDepthFunc(GL_LEQUAL);//<= make sure skybox depth which is 1.0 can be saw
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT); // because we are "in" the cube box
 
