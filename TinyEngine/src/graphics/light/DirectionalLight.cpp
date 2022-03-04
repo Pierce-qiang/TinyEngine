@@ -1,4 +1,4 @@
-#include "DirectionLight.h"
+#include "DirectionalLight.h"
 namespace TEngine {
 	DirectionalLight::DirectionalLight(float intensity, const glm::vec3& lightColor, const glm::vec3& lightDir) :
 		BaseLight(intensity, lightColor), mLightDir(lightDir)

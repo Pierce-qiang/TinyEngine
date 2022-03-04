@@ -8,7 +8,7 @@ namespace TEngine {
 
 	class DirectionalLight : public BaseLight
 	{
-		friend LightManager;
+		friend LightManager; //need visit mLightDir in shadow map procedure
 	public:
 		DirectionalLight(float intensity, const glm::vec3& lightColor, const glm::vec3& lightDir);
 		virtual ~DirectionalLight();
