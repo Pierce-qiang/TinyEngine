@@ -31,7 +31,7 @@ namespace TEngine {
 		friend void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 		friend void CursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
 		friend void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
-
+		friend void CharCallback(GLFWwindow* window, unsigned int c);
 
 
 	private:

@@ -11,6 +11,14 @@ namespace TEngine {
 
 	WindowManager::~WindowManager(){}
 
+	//register callback functions first
+	void ErrorCallback(int error, const char* description);
+	void WindowResizeCallback(GLFWwindow* window, int width, int height);
+	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+	void CursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
+	void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+	void CharCallback(GLFWwindow* window, unsigned int c);
 	// singleton pattern
 	WindowManager* WindowManager::Instance()
 	{
