@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\model\shapes\Sphere.cpp" />
+    <ClCompile Include="src\graphics\model\shapes\Quad.cpp" />
     <ClCompile Include="src\graphics\model\shapes\Cube.cpp" />
     <ClCompile Include="src\graphics\model\Model.cpp" />
     <ClCompile Include="src\graphics\model\Mesh.cpp" />
@@ -182,6 +184,8 @@
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\model\shapes\Sphere.h" />
+    <ClInclude Include="src\graphics\model\shapes\Quad.h" />
     <ClInclude Include="src\graphics\model\shapes\Cube.h" />
     <ClInclude Include="src\graphics\model\Model.h" />
     <ClInclude Include="src\graphics\model\Mesh.h" />

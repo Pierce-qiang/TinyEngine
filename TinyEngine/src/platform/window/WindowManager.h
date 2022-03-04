@@ -24,7 +24,8 @@ namespace TEngine {
 		WindowManager();
 		static WindowManager* sInstance;
 
-		// callback functions, friend is needed to visit private member
+		// callback functions which cannot be member functions
+		// but we need to visit private data, friend is needed 
 		friend void ErrorCallback(int error, const char* description);
 		friend void WindowResizeCallback(GLFWwindow* window, int width, int height);
 		friend void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -32,7 +33,6 @@ namespace TEngine {
 		friend void CursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
 		friend void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 		friend void CharCallback(GLFWwindow* window, unsigned int c);
-
 
 	private:
 		const char* mTitle;
