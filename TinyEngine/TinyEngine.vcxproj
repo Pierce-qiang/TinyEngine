@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="src\graphics\Skybox.cpp" />
     <ClCompile Include="src\platform\opengl\GBuffer.cpp" />
     <ClCompile Include="src\platform\opengl\FrameBuffer.cpp" />
@@ -170,6 +172,8 @@
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="src\graphics\Skybox.h" />
     <ClInclude Include="src\platform\opengl\GBuffer.h" />
     <ClInclude Include="src\platform\opengl\FrameBuffer.h" />
