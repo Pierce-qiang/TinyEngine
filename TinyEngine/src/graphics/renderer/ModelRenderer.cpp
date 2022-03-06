@@ -25,6 +25,7 @@ namespace TEngine {
 
 	ModelRenderer::~ModelRenderer()
 	{
+		mRenderQueue.clear();//let scene delete
 	}
 
 	void ModelRenderer::SubmitRenderModel(Model* model)

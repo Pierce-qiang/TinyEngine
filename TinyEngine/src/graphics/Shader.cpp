@@ -55,7 +55,7 @@ namespace TEngine {
 			glCompileShader(shader);
 
 			// TODO:Change GL_ENUM type to string for error message
-			//std::cout << shaderSource << ": \n";
+			/*std::cout << shaderSource << ": \n";*/
 			CheckCompileErrors(shader, "COMPILE", path);
 
 			glAttachShader(mShaderID, shader);

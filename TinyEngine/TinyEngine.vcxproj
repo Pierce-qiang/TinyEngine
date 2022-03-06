@@ -163,6 +163,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\renderer\RenderPassManager.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\postprocess\FXAAPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\postprocess\PassThroughPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\deferred\DeferredGeometryPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\deferred\DeferredLightingPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\forward\ForwardLightingPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\common\ShadowmapPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\RenderPass.cpp" />
+    <ClCompile Include="src\graphics\renderer\ModelRenderer.cpp" />
+    <ClCompile Include="src\graphics\light\LightManager.cpp" />
+    <ClCompile Include="src\graphics\light\SpotLight.cpp" />
+    <ClCompile Include="src\graphics\light\PointLight.cpp" />
+    <ClCompile Include="src\graphics\light\DirectionalLight.cpp" />
+    <ClCompile Include="src\graphics\light\BaseLight.cpp" />
+    <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\graphics\model\shapes\Sphere.cpp" />
     <ClCompile Include="src\graphics\model\shapes\Quad.cpp" />
     <ClCompile Include="src\graphics\model\shapes\Cube.cpp" />
@@ -180,10 +195,26 @@
     <ClCompile Include="src\graphics\texture\TextureLoader.cpp" />
     <ClCompile Include="src\platform\window\InputManager.cpp" />
     <ClCompile Include="src\platform\window\WindowManager.cpp" />
+    <ClCompile Include="src\graphics\renderer\renderpass\postprocess\SSRPass.cpp" />
     <ClCompile Include="vendor\glad.c" />
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\renderer\RenderPassManager.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\postprocess\FXAAPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\postprocess\PassThroughPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\deferred\DeferredGeometryPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\deferred\DeferredLightingPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\forward\ForwardLightingPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\common\ShadowmapPass.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\RenderPass.h" />
+    <ClInclude Include="src\graphics\renderer\ModelRenderer.h" />
+    <ClInclude Include="src\graphics\light\LightManager.h" />
+    <ClInclude Include="src\graphics\light\SpotLight.h" />
+    <ClInclude Include="src\graphics\light\PointLight.h" />
+    <ClInclude Include="src\graphics\light\DirectionalLight.h" />
+    <ClInclude Include="src\graphics\light\BaseLight.h" />
+    <ClInclude Include="src\graphics\Scene.h" />
     <ClInclude Include="src\graphics\model\shapes\Sphere.h" />
     <ClInclude Include="src\graphics\model\shapes\Quad.h" />
     <ClInclude Include="src\graphics\model\shapes\Cube.h" />
@@ -201,7 +232,9 @@
     <ClInclude Include="src\graphics\texture\TextureLoader.h" />
     <ClInclude Include="src\platform\window\InputManager.h" />
     <ClInclude Include="src\platform\window\WindowManager.h" />
+    <ClInclude Include="src\graphics\renderer\renderpass\postprocess\SSRPass.h" />
     <ClInclude Include="vendor\stb_image.h" />
+    <ClInclude Include="vendor\stb_image_write.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
