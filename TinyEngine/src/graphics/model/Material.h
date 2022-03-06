@@ -22,6 +22,7 @@ namespace TEngine {
 
 	private:
 		// TODO: remember to release this texture inside or outside
+		//take care, material do not own texture, Textureloader own it, we need to delete in textureloader
 		Texture* mAlbedoMap;
 		Texture* mNormalMap;
 		Texture* mMetallicMap;

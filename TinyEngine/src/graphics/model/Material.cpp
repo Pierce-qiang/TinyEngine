@@ -15,12 +15,6 @@ namespace TEngine {
 
 	Material::~Material()
 	{
-		if (mAlbedoMap != nullptr) delete mAlbedoMap;
-		if (mNormalMap != nullptr) delete mNormalMap;
-		if (mMetallicMap != nullptr) delete mMetallicMap;
-		if (mRoughnessMap != nullptr) delete mRoughnessMap;
-		if (mAOMap != nullptr) delete mAOMap;
-		if (mMixtureMap != nullptr) delete mMixtureMap;
 	}
 
 	void Material::SeperateMixture()
