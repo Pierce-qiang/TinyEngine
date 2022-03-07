@@ -29,7 +29,7 @@ namespace TEngine {
 		depthStencilTextureSettings.TextureWrapTMode = GL_CLAMP_TO_BORDER;
 		depthStencilTextureSettings.TextureMagnificationFilterMode = GL_NEAREST;
 		depthStencilTextureSettings.TextureMinificationFilterMode = GL_NEAREST;
-		depthStencilTextureSettings.HasBorder = true;	// use default (1,1,1) border color
+		depthStencilTextureSettings.HasBorder = true;	// use default (1,1,1,1) border color
 		depthStencilTextureSettings.HasMips = false;
 		mLightingFBO->AddDepthStencilTexture(depthStencilTextureSettings, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, GL_DEPTH_STENCIL_ATTACHMENT);
 

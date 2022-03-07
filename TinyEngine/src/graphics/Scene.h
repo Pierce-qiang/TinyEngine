@@ -15,7 +15,7 @@ namespace TEngine {
 		~Scene();
 
 
-		void Update(float deltaTime);
+		void ProcessInput(float deltaTime);
 
 		// add all scene's models to render's renderqueue
 		void AddModelsToRender();

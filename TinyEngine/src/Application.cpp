@@ -53,7 +53,7 @@ int main()
 
 		// process input events
 		// --------------------
-		scene.Update(deltaTime);
+		scene.ProcessInput(deltaTime);
 
 		// render
 		// ------

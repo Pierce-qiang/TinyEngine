@@ -9,7 +9,7 @@ namespace TEngine {
 		mDeferredGeometryPass(scene), mDeferredLightingPass(scene), mSSRPass(scene),
 		mFXAAPass(scene), mPS(scene)
 	{
-		// always enable this
+		// always enable this to let sample cube map seamlessly
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	}
 

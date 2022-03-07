@@ -76,7 +76,7 @@ namespace TEngine {
 		// create 4 render targets
 		Bind();
 		mRenderTargetsCount = 4;
-
+		// 0 RGBA8  ->       albedo.r     albedo.g        albedo.b     albedo's alpha
 		TextureSettings renderTarget1;
 		renderTarget1.TextureFormat = GL_RGBA8;
 		renderTarget1.TextureWrapSMode = GL_CLAMP_TO_EDGE;
@@ -89,7 +89,7 @@ namespace TEngine {
 		mRenderTargets.push_back(albedoTargets);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderTargets[0]->GetTextureId(), 0);
 
-
+		// 1 RGB32F ->       normal.x     normal.y        normal.z
 		TextureSettings renderTarget2;
 		renderTarget2.TextureFormat = GL_RGB32F;
 		renderTarget2.TextureWrapSMode = GL_CLAMP_TO_EDGE;
@@ -101,7 +101,7 @@ namespace TEngine {
 		normalTargets->Generate2DTexture(mWidth, mHeight, GL_RGB, GL_FLOAT);
 		mRenderTargets.push_back(normalTargets);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, mRenderTargets[1]->GetTextureId(), 0);
-
+		// 2 RGB32F ->       pos.x		  pos.y		      pos.z
 		TextureSettings renderTarget3;
 		renderTarget3.TextureFormat = GL_RGB32F;
 		renderTarget3.TextureWrapSMode = GL_CLAMP_TO_EDGE;
@@ -113,7 +113,7 @@ namespace TEngine {
 		positionTargets->Generate2DTexture(mWidth, mHeight, GL_RGB, GL_FLOAT);
 		mRenderTargets.push_back(positionTargets);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, mRenderTargets[2]->GetTextureId(), 0);
-
+		// 3 RGB8  ->        roughness    metallic        ambientOcclusion
 		TextureSettings renderTarget4;
 		renderTarget4.TextureFormat = GL_RGB8;
 		renderTarget4.TextureWrapSMode = GL_CLAMP_TO_EDGE;

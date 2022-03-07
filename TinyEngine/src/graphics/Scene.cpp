@@ -21,7 +21,7 @@ namespace TEngine {
 		mModels.clear();
 	}
 
-	void Scene::Update(float deltaTime)
+	void Scene::ProcessInput(float deltaTime)
 	{
 		// just process the user's input now
 		mCamera->ProcessInput(deltaTime);
@@ -47,7 +47,6 @@ namespace TEngine {
 		Model* vikingsword = new Model("res/vikingsword/scene.gltf");
 		//Model* chess = new Model("res/Chess/scene.gltf");
 
-
 		mModels.push_back(gameboy);
 		//mModels.push_back(chess);
 		mModels.push_back(vikingsword);
@@ -57,8 +56,8 @@ namespace TEngine {
 		mModels.push_back(cube3);
 		mModels.push_back(gun);
 		mModels.push_back(sponza);
-
-
+		//set pos
+		
 		//Model* sphere1 = new Model(Sphere());
 		//Model* sphere2 = new Model(Sphere());
 		//mModels.push_back(sphere1);
@@ -81,6 +80,7 @@ namespace TEngine {
 		sponza->SetPosition(glm::vec3(0.02f, 0.02f, -50.02f));
 		sponza->SetScale(glm::vec3(0.015f, 0.015f, 0.015f));
 
+		//TODO: set material texture
 		TextureSettings srgbTextureSettings;
 		srgbTextureSettings.IsSRGB = true;
 		//dragon->GetMesh(0)->GetMaterial()->SetAlbedoMap(TextureLoader::Load2DTexture("res/texture/wood.png", &srgbTextureSettings));
@@ -95,7 +95,7 @@ namespace TEngine {
 		gun->GetMesh(0)->GetMaterial()->SetAmbientOcclusionMap(TextureLoader::Load2DTexture("res/cerberus/materials/cerberus_ao.png"));
 
 
-
+		//TODO: skybox
 		std::vector<std::string> skyboxFilePaths;
 		skyboxFilePaths.push_back("res/skybox/right.png");
 		skyboxFilePaths.push_back("res/skybox/left.png");
