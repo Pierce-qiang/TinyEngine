@@ -51,6 +51,7 @@ namespace TEngine {
 		// view setup
 		mShadowmapGenShader->Bind();
 		glm::vec3 dirLightShadowmapLookAtPos = camera->GetPosition() + (glm::normalize(camera->GetFront()) * 15.0f);
+		//note the direction of DirLight is inverted, thus here is  + 
 		glm::vec3 dirLightShadowmapEyePos = dirLightShadowmapLookAtPos + (glm::normalize(directionalLightDir) * 35.0f);
 		glm::mat4 directionalLightProjection = glm::ortho(-30.0f, 30.0f, -30.0f, 30.0f, SHADOWMAP_NEAR_PLANE, SHADOWMAP_FAR_PLANE);
 		glm::mat4 directionalLightView = glm::lookAt(dirLightShadowmapEyePos, dirLightShadowmapLookAtPos, glm::vec3(0.0f, 1.0f, 0.0f));
