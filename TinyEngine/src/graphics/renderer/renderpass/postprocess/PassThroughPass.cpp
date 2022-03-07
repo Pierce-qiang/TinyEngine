@@ -44,7 +44,7 @@ namespace TEngine {
 
 		modelRenderer->NDC_Plane.Draw();
 
-		//DisplayTexture(0, 0, WindowManager::Instance()->GetWidth(), WindowManager::Instance()->GetHeight(), mSSRFBO->GetColourTexture(), 4, 8);
+		
 		DisplayTexture(0, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(0), 4, 10);
 		DisplayTexture(150, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(1), 4, 11);
 		DisplayTexture(300, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(2), 4, 12);
@@ -52,7 +52,7 @@ namespace TEngine {
 		DisplayTexture(600, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(3), 2, 14);
 		DisplayTexture(750, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(3), 3, 15);
 		//DisplayTexture(900, 0, 150, 150, gInput.outputGBuffer->GetDepthStencilTexture(), 1, 16);
-
+		//DisplayTexture(1050, 0, 150,150 , ssrInput.ssrFBO->GetColourTexture(), 4, 8);
 		glEnable(GL_DEPTH_TEST);
 	}
 }
