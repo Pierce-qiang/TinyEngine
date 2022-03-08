@@ -31,8 +31,12 @@
 *.out
 *.app
 
-# config
+# config， update skybox， shader， texture
 /TinyEngine/vendor/*
 /TinyEngine/Debug/*
 /TinyEngine/.vs/*
-/TinyEngine/res/*
+/TinyEngine/res/cerberus*
+/TinyEngine/res/Chess*
+/TinyEngine/res/gameboy*
+/TinyEngine/res/Sponza*
+/TinyEngine/res/vikingsword*
