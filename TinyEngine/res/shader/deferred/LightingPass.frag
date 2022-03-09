@@ -73,17 +73,19 @@ vec3 FresnelSchlick(float HdotV, vec3 F0) ;
 // Shadow factor cal
 float ShadowCalculation(vec3 coords);
 
-//---------------pcss---------------
+//---------------pcss----------------------------
 //poisson sample and pcss
 #define NUM_SAMPLES 25
 #define BLOCKER_SEARCH_NUM_SAMPLES NUM_SAMPLES
 #define PCF_NUM_SAMPLES NUM_SAMPLES
 #define NUM_RINGS 10.0
 #define LIGHT_WIDTH 25.0
-vec2 poissonDisk[NUM_SAMPLES];
+vec2 sampleBuffer[NUM_SAMPLES];
 float PCF(vec3 coords, float filtersize);
 float PCSS(vec3 coords);
-//----------------------------------------
+void uniformDiskSamples( const in vec2 randomSeed );
+void poissonDiskSamples( const in vec2 randomSeed );
+//-----------------------------------------------
 
 // Tonemapping
 vec3 ACESTonemapping(vec3 value);
@@ -159,17 +161,22 @@ vec3 CalculateDirectionalLightRadiance(vec3 albedo, vec3 normal, float metallic,
 			continue;
 		}
 
-		//TODO: swich shadow cal mode here!-------------------
+		//TODO: ---------------------------swich shadow cal mode here!---------------------------------
+		//init samples
+		vec2 seed = texCoords;
+		//uniformDiskSamples(seed); //bad effect
+  		poissonDiskSamples(seed);
 
-		// shadow just sample near 8 sample
+
+		// Option1: shadow just sample near 8 sample
 		// float shadow = ShadowCalculation(projCoords); 
 		// directLightRadiance += (diffuse + specular) * radiance * NdotL * (1 - shadow);
 
-		//pcf
+		// Option2: pcf
 		// float visibility = PCF(projCoords, 2.0);
 		// directLightRadiance += (diffuse + specular) * radiance * NdotL * visibility;
 
-		// pcss
+		// Option3: pcss
 		float visibility = PCSS(projCoords);
 		directLightRadiance += (diffuse + specular) * radiance * NdotL * visibility;
 	}
@@ -327,7 +334,7 @@ void poissonDiskSamples( const in vec2 randomSeed ) {
   float radiusStep = radius;
 
   for( int i = 0; i < NUM_SAMPLES; i ++ ) {
-    poissonDisk[i] = vec2( cos( angle ), sin( angle ) ) * pow( radius, 0.75 );
+    sampleBuffer[i] = vec2( cos( angle ), sin( angle ) ) * pow( radius, 0.75 );
     radius += radiusStep;
     angle += ANGLE_STEP;
   }
@@ -343,7 +350,7 @@ void uniformDiskSamples( const in vec2 randomSeed ) {
   float radius = sqrt(sampleY);
 
   for( int i = 0; i < NUM_SAMPLES; i ++ ) {
-    poissonDisk[i] = vec2( radius * cos(angle) , radius * sin(angle)  );
+    sampleBuffer[i] = vec2( radius * cos(angle) , radius * sin(angle)  );
 
     sampleX = rand_1to1( sampleY ) ;
     sampleY = rand_1to1( sampleX ) ;
@@ -353,15 +360,13 @@ void uniformDiskSamples( const in vec2 randomSeed ) {
   }
 }
 
+
 float findBlocker(vec2 uv, float zReceiver ) {
-  // set random number
-  vec2 seed = texCoords;
-  poissonDiskSamples(seed);
   //record bloker number and depth
   int blokerCount = 0;
   float blokerDepthSum = 0.0;
   for (int i = 0; i < BLOCKER_SEARCH_NUM_SAMPLES;i++){
-    float shadowMapDepth = texture(shadowMap, uv + poissonDisk[i] / textureResolution).r;
+    float shadowMapDepth = texture(shadowMap, uv + sampleBuffer[i] / textureResolution).r;
     if (shadowMapDepth < zReceiver){
       blokerCount++;
       blokerDepthSum += shadowMapDepth;
@@ -374,15 +379,10 @@ float findBlocker(vec2 uv, float zReceiver ) {
 }
 
 float PCF(vec3 coords, float filtersize) {
-
-  //set random number
-  vec2 seed = texCoords;
-  poissonDiskSamples(seed);
-
   //calculate visibility
   float visibility = 0.0;
   for (int i = 0; i < PCF_NUM_SAMPLES; i++){
-    vec2 offset = poissonDisk[i] * filtersize / textureResolution;
+    vec2 offset = sampleBuffer[i] * filtersize / textureResolution;
     vec2 offsetCoord = coords.xy + offset;
     float shadowDepth = texture(shadowMap, offsetCoord).r;
     visibility += (coords.z < shadowDepth) ? 1.0:0.0;
