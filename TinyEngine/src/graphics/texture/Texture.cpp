@@ -102,4 +102,13 @@ namespace TEngine {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, mTextureSettings.MipBias);
 		}
 	}
+	void Texture::displayTexture(std::string name, bool invert /*= true*/, ImGuiWindowFlags flag /* = ImGuiWindowFlags()*/) {
+
+		ImGui::Begin(name.c_str(),0,flag);
+		ImGui::Text("size = %d x %d", mWidth, mHeight);
+		if(invert)
+			ImGui::Image((void*)(intptr_t)mTextureId, ImVec2(mWidth, mHeight), ImVec2(0, 1), ImVec2(1, 0));
+		else ImGui::Image((void*)(intptr_t)mTextureId, ImVec2(mWidth, mHeight));
+		ImGui::End();
+	}
 }

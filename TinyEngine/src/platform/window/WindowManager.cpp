@@ -106,6 +106,11 @@ namespace TEngine {
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();
 	}
+	void WindowManager::ReleaseResource() {
+		glfwDestroyWindow(mWindow);
+		glfwTerminate();
+	}
+
 
 	void WindowManager::Clear()
 	{

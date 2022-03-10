@@ -14,9 +14,11 @@ namespace TEngine {
 		int GetWidth() { return mWidth; }
 		int GetHeight() { return mHeight; }
 		bool IsHideCursor() { return mHideCursor; }
+		GLFWwindow* GetWindow() { return mWindow; }
 
 		bool IsTerminated();
 		void Update();
+		void ReleaseResource();
 		static void Clear();	// clear depth, color and stencil buffer
 		static void Bind();		// bind the default framebuffer
 

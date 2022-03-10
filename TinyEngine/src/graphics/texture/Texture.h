@@ -1,8 +1,8 @@
 #pragma once
 #include "glm/glm.hpp"
 #include "glad/glad.h"
-
-
+#include "imgui/imgui.h"
+#include <string>
 namespace TEngine {
 	struct TextureSettings
 	{
@@ -46,6 +46,7 @@ namespace TEngine {
 
 		void bind(int unit = 0);
 		void unbind();
+		void displayTexture(std::string name, bool invert = true, ImGuiWindowFlags flag = ImGuiWindowFlags());
 
 		// pre-generation controls only
 		inline void SetTextureSettings(TextureSettings settings) { mTextureSettings = settings; }
