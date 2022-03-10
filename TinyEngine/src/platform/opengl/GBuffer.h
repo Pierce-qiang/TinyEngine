@@ -16,7 +16,7 @@ namespace TEngine {
 
 
 		inline Texture* GetRenderTarget(int index) { return mRenderTargets[index]; }
-
+		inline std::vector<Texture*>& GetColourTextures() { return mRenderTargets; };
 	private:
 		void Init();
 
