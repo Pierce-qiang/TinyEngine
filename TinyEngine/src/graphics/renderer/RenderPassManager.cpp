@@ -31,7 +31,7 @@ namespace TEngine {
 		PostProcessOutput fxaaOutput = mFXAAPass.Render(lightOutput);
 
 		//mPS.Render(gOutput, lightOutput.deferredLightingFBO, ssrOutput);
-		mPS.Render(gOutput, fxaaOutput.fbo, ssrOutput);
+		mPS.Render(gOutput, fxaaOutput.fbo, ssrOutput, smOutput);
 	}
 
 	void RenderPassManager::SaverRenderFrame(const std::string& savePath)

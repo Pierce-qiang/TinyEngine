@@ -78,7 +78,7 @@ float ShadowCalculation(vec3 coords);
 #define NUM_SAMPLES 25
 #define BLOCKER_SEARCH_NUM_SAMPLES NUM_SAMPLES
 #define PCF_NUM_SAMPLES NUM_SAMPLES
-#define NUM_RINGS 10.0
+#define NUM_RINGS 5.0
 #define LIGHT_WIDTH 25.0
 vec2 sampleBuffer[NUM_SAMPLES];
 float PCF(vec3 coords, float filtersize);
@@ -173,12 +173,12 @@ vec3 CalculateDirectionalLightRadiance(vec3 albedo, vec3 normal, float metallic,
 		// directLightRadiance += (diffuse + specular) * radiance * NdotL * (1 - shadow);
 
 		// Option2: pcf
-		// float visibility = PCF(projCoords, 2.0);
-		// directLightRadiance += (diffuse + specular) * radiance * NdotL * visibility;
-
-		// Option3: pcss
-		float visibility = PCSS(projCoords);
+		float visibility = PCF(projCoords, 2.0);
 		directLightRadiance += (diffuse + specular) * radiance * NdotL * visibility;
+
+		// Option3: pcss, problem Light-Leaking please avoid higher object hiding lower object
+		// float visibility = PCSS(projCoords);
+		// directLightRadiance += (diffuse + specular) * radiance * NdotL * visibility;
 	}
 
 	return directLightRadiance;

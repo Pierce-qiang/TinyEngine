@@ -71,6 +71,7 @@ namespace TEngine {
 		ShadowmapPassOutput passOutput;
 		passOutput.lightSpaceMatrix = directionalLightViewProjMatrix;
 		passOutput.shadowmapFramebuffer = mShadowmapFB;
+
 		return passOutput;
 	}
 }

@@ -16,7 +16,7 @@ namespace TEngine {
 		delete mPassThroughShader;
 	}
 
-	void PassThroughPass::Render(GeometryPassOutput gInput, FrameBuffer* colorFBO, SSRPassOutput ssrInput /*= {nullptr}*/)
+	void PassThroughPass::Render(GeometryPassOutput gInput, FrameBuffer* colorFBO, SSRPassOutput ssrInput /*= {nullptr}*/, ShadowmapPassOutput smInput /*= {glm::mat4(1.0f), nullptr}*/)
 	{
 		glDisable(GL_DEPTH_TEST);
 
@@ -44,8 +44,8 @@ namespace TEngine {
 
 		modelRenderer->NDC_Plane.Draw();
 
-		
-		DisplayTexture(0, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(0), 4, 10);
+		DisplayTexture(0, 0, 150, 150, smInput.shadowmapFramebuffer->GetColourTexture(), 1, 0);
+		//DisplayTexture(0, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(0), 4, 10);
 		DisplayTexture(150, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(1), 4, 11);
 		DisplayTexture(300, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(2), 4, 12);
 		DisplayTexture(450, 0, 150, 150, gInput.outputGBuffer->GetRenderTarget(3), 1, 13);

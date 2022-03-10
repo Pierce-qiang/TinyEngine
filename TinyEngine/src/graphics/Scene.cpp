@@ -42,7 +42,7 @@ namespace TEngine {
 		Model* cube3 = new Model(Cube());
 		Model* sphere1 = new Model(Sphere());
 		Model* gun = new Model("res/cerberus/meshes/cerberus.obj");
-		Model* sponza = new Model("res/sponza/sponza.obj");
+		//Model* sponza = new Model("res/sponza/sponza.obj");
 		Model* gameboy = new Model("res/gameboy/scene.gltf");
 		Model* vikingsword = new Model("res/vikingsword/scene.gltf");
 		//Model* chess = new Model("res/Chess/scene.gltf");
@@ -55,7 +55,7 @@ namespace TEngine {
 		mModels.push_back(cube2);
 		mModels.push_back(cube3);
 		mModels.push_back(gun);
-		mModels.push_back(sponza);
+		//mModels.push_back(sponza);
 		//set pos
 		
 		//Model* sphere1 = new Model(Sphere());
@@ -77,8 +77,8 @@ namespace TEngine {
 		cube3->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
 		gun->SetPosition(glm::vec3(2.0f, 0.5f, 0.0f));
 		gun->SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
-		sponza->SetPosition(glm::vec3(0.02f, 0.02f, -50.02f));
-		sponza->SetScale(glm::vec3(0.015f, 0.015f, 0.015f));
+		//sponza->SetPosition(glm::vec3(0.02f, 0.02f, -50.02f));
+		//sponza->SetScale(glm::vec3(0.015f, 0.015f, 0.015f));
 
 		//TODO: set material texture
 		TextureSettings srgbTextureSettings;

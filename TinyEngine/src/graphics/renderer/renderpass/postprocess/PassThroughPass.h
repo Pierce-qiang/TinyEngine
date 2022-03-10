@@ -7,7 +7,7 @@ namespace TEngine {
 		PassThroughPass(Scene* scene);
 		~PassThroughPass();
 
-		void Render(GeometryPassOutput gInput, FrameBuffer* colorFBO, SSRPassOutput ssrInput = { nullptr });
+		void Render(GeometryPassOutput gInput, FrameBuffer* colorFBO, SSRPassOutput ssrInput = { nullptr }, ShadowmapPassOutput smInput = { glm::mat4(1.0f), nullptr });
 
 	private:
 		Shader* mPassThroughShader;
