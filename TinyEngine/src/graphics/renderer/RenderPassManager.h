@@ -6,6 +6,9 @@
 #include "renderpass/postprocess/FXAAPass.h"
 #include "renderpass/postprocess/PassThroughPass.h"
 #include "renderpass/postprocess/SSRPass.h"
+#include <unordered_map>
+#include <string>
+#include "../../platform/opengl/FrameBuffer.h"
 namespace TEngine {
 	class RenderPassManager
 	{
@@ -13,10 +16,9 @@ namespace TEngine {
 		RenderPassManager(Scene* scene);
 		~RenderPassManager();
 
-		void Init();
 		void Render();
 		void SaverRenderFrame(const std::string& savePath);
-
+		std::unordered_map<std::string, FrameBuffer*>& GetFrameBuffers() { return outPutframeBuffer; }
 	private:
 		Scene* mScene;  // mScene's memory is managed outside
 
@@ -28,6 +30,7 @@ namespace TEngine {
 		SSRPass mSSRPass;
 		FXAAPass mFXAAPass;
 		PassThroughPass mPS;
+		std::unordered_map<std::string, FrameBuffer*> outPutframeBuffer;
 	};
 }
 

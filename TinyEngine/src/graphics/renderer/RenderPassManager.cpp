@@ -3,6 +3,7 @@
 #include "stb_image.h"
 #include "../../platform/window/WindowManager.h"
 #include "stb_image_write.h"
+#include "imgui/imgui.h"
 namespace TEngine {
 	RenderPassManager::RenderPassManager(Scene* scene) :
 		mScene(scene), mFowardLightingPass(scene), mShadowmapPass(scene),
@@ -32,8 +33,14 @@ namespace TEngine {
 
 		//mPS.Render(gOutput, lightOutput.deferredLightingFBO, ssrOutput);
 		mPS.Render(gOutput, fxaaOutput.fbo, ssrOutput, smOutput);
+		outPutframeBuffer.insert({ "ShadowMap_Output", smOutput.shadowmapFramebuffer });
+		outPutframeBuffer.insert({ "GeometryPass_Output", gOutput.outputGBuffer });
+		outPutframeBuffer.insert({ "LightPass_Output", lightOutput.fbo });
+		outPutframeBuffer.insert({ "SSRPass_Output", ssrOutput.ssrFBO });
+		outPutframeBuffer.insert({ "FXAA_Output", fxaaOutput.fbo });
+		outPutframeBuffer.insert({ "Scene", mPS.GetFrameBuffer() });
+		
 	}
-
 	void RenderPassManager::SaverRenderFrame(const std::string& savePath)
 	{
 		int width = WindowManager::Instance()->GetWidth();
