@@ -14,6 +14,7 @@
 #include "graphics/renderer/RenderPassManager.h"
 #include "graphics/texture/TextureLoader.h"
 #include "graphics/Shader.h"
+#include "graphics/GuiManager.h"
 using namespace TEngine;
 //unsigned int LoadTexture(const char* path);
 //void renderScene(Shader& shader);
@@ -33,7 +34,7 @@ int main()
 {
 	// Init
 	InputManager::Instance();
-	if (!WindowManager::Instance()->Init("SRenderEngine", 800, 600))
+	if (!WindowManager::Instance()->Init("TinyEngine", 1600, 900))
 	{
 		std::cout << "Could not initialize window class!\n";
 		glfwTerminate();
@@ -42,6 +43,8 @@ int main()
 	TextureLoader::InitDefaultTextures();
 	Scene scene(0);
 	RenderPassManager renderPassManager(&scene);
+	GuiManager guiManager(&scene, &renderPassManager);
+
 
 	while (!WindowManager::Instance()->IsTerminated())
 	{
@@ -54,7 +57,7 @@ int main()
 		// process input events
 		// --------------------
 		scene.ProcessInput(deltaTime);
-
+		
 		// render
 		// ------
 		// TODO: If set glclearcolor to some "actual color", it will have some bugs in deferred renering because of the color buffer value
@@ -64,7 +67,7 @@ int main()
 		WindowManager::Instance()->Clear();
 		WindowManager::Instance()->Bind();
 		renderPassManager.Render();
-
+		guiManager.Draw();
 		//renderPassManager.SaverRenderFrame("./test.png");
 		// swap buffers and poll IO events
 		// -------------------------------
@@ -73,7 +76,8 @@ int main()
 		//	<< " " << scene.GetCamera()->GetPosition()[2] << "\n";
 	}
 	TextureLoader::DestroyCachedTexture();
-	glfwTerminate();
+	guiManager.EndGui();
+	WindowManager::Instance()->ReleaseResource();
 	return 0;
 }
 
