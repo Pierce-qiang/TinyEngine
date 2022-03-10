@@ -22,7 +22,7 @@ namespace TEngine {
 		colorTextureSettings.TextureMinificationFilterMode = GL_LINEAR;
 		colorTextureSettings.HasMips = false;
 		mFXAAFBO->AddColorTexture(colorTextureSettings, GL_RGBA, GL_FLOAT, GL_COLOR_ATTACHMENT0);
-		mFXAAFBO->AddDepthStencilRBO(GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT);
+		//mFXAAFBO->AddDepthStencilRBO(GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT);
 		mFXAAFBO->CreateFrameBuffer();
 	}
 

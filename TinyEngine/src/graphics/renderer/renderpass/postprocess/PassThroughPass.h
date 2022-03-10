@@ -8,9 +8,11 @@ namespace TEngine {
 		~PassThroughPass();
 
 		void Render(GeometryPassOutput gInput, FrameBuffer* colorFBO, SSRPassOutput ssrInput = { nullptr }, ShadowmapPassOutput smInput = { glm::mat4(1.0f), nullptr });
+		FrameBuffer* GetFrameBuffer() { return mfbo; };
 
 	private:
 		Shader* mPassThroughShader;
+		FrameBuffer* mfbo;
 	};
 }
 
