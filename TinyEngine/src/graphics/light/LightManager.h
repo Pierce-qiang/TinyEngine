@@ -17,7 +17,7 @@ namespace TEngine {
 		void AddSpotLight(const SpotLight& spotLight);
 
 		const glm::vec3& GetDirectionalLightDirection(unsigned int index);
-
+		void OnGui();
 	private:
 		void InitBasicLights();
 

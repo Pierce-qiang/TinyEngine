@@ -16,4 +16,11 @@ namespace TEngine {
 		shader->SetUniform(("pointLights[" + std::to_string(currentLightIndex) + "].lightColor").c_str(), mLightColor);
 		shader->SetUniform(("pointLights[" + std::to_string(currentLightIndex) + "].attenuationRadius").c_str(), mAttenuationRadius);
 	}
+
+	void PointLight::OnGui() {
+		BaseLight::OnGui();
+		ImGui::DragFloat("AttenuationRadius", &mAttenuationRadius,DRAG_SPEED,1,10);
+		ImGui::DragFloat3("WorldPos", &mLightPos[0],DRAG_SPEED);
+	}
+
 }

@@ -9,4 +9,8 @@ namespace TEngine {
 	BaseLight::~BaseLight()
 	{
 	}
+	void BaseLight::OnGui() {
+		ImGui::DragFloat("Intensity", &mIntensity, DRAG_SPEED, 0.01,10);
+		ImGui::ColorEdit3("BaseColor", &mLightColor[0]);
+	}
 }

@@ -1,7 +1,9 @@
 #pragma once
 #include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
 #include "../Shader.h"
-
+#include "imgui/imgui.h"
+#include "../../macros.h"
 namespace TEngine {
 	class BaseLight
 	{
@@ -10,7 +12,7 @@ namespace TEngine {
 		virtual ~BaseLight();
 
 		virtual void SetupUniforms(Shader* shader, int currentLightIndex) = 0;
-
+		virtual void OnGui();
 	protected:
 		float mIntensity;
 		glm::vec3 mLightColor;

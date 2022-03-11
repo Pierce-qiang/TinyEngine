@@ -14,7 +14,7 @@ namespace TEngine {
 		virtual ~DirectionalLight();
 
 		virtual void SetupUniforms(Shader* shader, int currentLightIndex) override;
-
+		void OnGui()override;
 	private:
 		glm::vec3 mLightDir;
 	};

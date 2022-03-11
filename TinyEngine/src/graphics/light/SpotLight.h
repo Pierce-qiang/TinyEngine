@@ -11,10 +11,12 @@ namespace TEngine {
 		virtual ~SpotLight();
 
 		virtual void SetupUniforms(Shader* shader, int currentLightIndex) override;
+		void OnGui()override;
 	private:
 		float mAttenuationRadius;
-		glm::vec3 mLightPos, mLightDir;
 		float mInnerCutOff, mOuterCutOff;
+		glm::vec3 mLightPos, mLightDir;
+		
 
 	};
 }

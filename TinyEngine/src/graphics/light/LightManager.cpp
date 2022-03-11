@@ -43,6 +43,40 @@ namespace TEngine {
 		return mDirectionalLights[index].mLightDir;
 	}
 
+	void LightManager::OnGui() {
+		if (ImGui::TreeNode("DirLight")) {
+			for (int i = 0; i < mDirectionalLights.size(); i++)
+			{
+				if (ImGui::CollapsingHeader((std::string("DirLight ") + std::to_string(i)).c_str()))
+					mDirectionalLights[i].OnGui();
+				
+			}
+			ImGui::TreePop();
+		}
+		//more------------------------------------------
+		if (ImGui::TreeNode("PointLight"))
+		{
+			for (int i = 0; i < mPointLights.size(); i++)
+			{
+				if (ImGui::CollapsingHeader((std::string("PointLight ") + std::to_string(i)).c_str()))
+					mPointLights[i].OnGui();
+
+			}
+			ImGui::TreePop();
+		}
+		if (ImGui::TreeNode("SpotLight"))
+		{
+			for (int i = 0; i < mSpotLights.size(); i++)
+			{
+				if (ImGui::CollapsingHeader((std::string("SpotLight ") + std::to_string(i)).c_str()))
+					mSpotLights[i].OnGui();
+
+			}
+			ImGui::TreePop();
+		}
+		
+	}
+
 	void LightManager::InitBasicLights()
 	{
 		// Setup some lights for the scene

@@ -15,4 +15,8 @@ namespace TEngine {
 		shader->SetUniform(("dirLights[" + std::to_string(currentLightIndex) + "].intensity").c_str(), mIntensity);
 		shader->SetUniform(("dirLights[" + std::to_string(currentLightIndex) + "].lightColor").c_str(), mLightColor);
 	}
+	void DirectionalLight::OnGui() {
+		BaseLight::OnGui();
+		ImGui::DragFloat3("Dir", glm::value_ptr(mLightDir), DRAG_SPEED,-1,1);
+	}
 }

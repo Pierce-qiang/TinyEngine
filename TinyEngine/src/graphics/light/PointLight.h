@@ -9,6 +9,7 @@ namespace TEngine {
 		virtual ~PointLight();
 
 		virtual void SetupUniforms(Shader* shader, int currentLightIndex) override;
+		void OnGui()override;
 	private:
 		float mAttenuationRadius;
 		glm::vec3 mLightPos;
