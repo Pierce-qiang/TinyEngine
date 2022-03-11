@@ -46,7 +46,7 @@ namespace TEngine {
 
 		void bind(int unit = 0);
 		void unbind();
-		void displayTexture(std::string name, bool invert = true, ImGuiWindowFlags flag = ImGuiWindowFlags());
+		void displayTexture(bool invert = true);
 
 		// pre-generation controls only
 		inline void SetTextureSettings(TextureSettings settings) { mTextureSettings = settings; }
