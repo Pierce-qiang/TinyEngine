@@ -46,11 +46,27 @@ namespace TEngine {
 		ImGui::ShowDemoWindow();
 		//TODO: Write Gui logic------------------------
 
-#define DEBUG
-#ifdef DEBUG
-		//the input callback and the textinput do not decouple, I don't know how to do it
-#pragma region drawBufferTextures
+		//Draw Scene Texture
 		auto outputBuffers = mRenderpassManager->GetFrameBuffers();
+		auto ScneBufferIte = outputBuffers.find("Scene");
+		if (ScneBufferIte != outputBuffers.end()) {
+			ImGui::Begin(ScneBufferIte->first.c_str());
+			bool savePictur = false;
+			ImGui::Checkbox("save picture", &savePictur);
+			if (savePictur)
+			{
+				savePictur = false;
+				ScneBufferIte->second->SaverRenderFrame(ScneBufferIte->first);
+			}
+			ScneBufferIte->second->GetColourTexture()->displayTexture();
+			ImGui::End();
+			outputBuffers.erase(ScneBufferIte->first);
+		}
+
+//#define DEBUG
+#ifdef DEBUG
+		//bad smell code...
+#pragma region drawBufferTextures
 		for (auto& item : outputBuffers) {
 			if ("GeometryPass_Output" == item.first)
 			{
@@ -62,11 +78,10 @@ namespace TEngine {
 				bool savePictur = false;
 				ImGui::Checkbox("save picture", &savePictur);
 				//text box
-				static char name[64] = ""; ImGui::InputText("saveName", name, 64);
 				if (savePictur)
 				{
 					savePictur = false;
-					gOutput->SaverRenderFrame(name);
+					gOutput->SaverRenderFrame("GeometryPassout");
 				}
 
 				for (auto& texture : textures) {
@@ -78,12 +93,10 @@ namespace TEngine {
 				ImGui::Begin(item.first.c_str());
 				bool savePictur = false;
 				ImGui::Checkbox("save picture", &savePictur);
-				//text box
-				static char name[64] = ""; ImGui::InputText("saveName", name, 64);
 				if (savePictur)
 				{
 					savePictur = false;
-					item.second->SaverRenderFrame(name);
+					item.second->SaverRenderFrame("ShadowMap");
 				}
 				item.second->GetDepthStencilTexture()->displayTexture();
 				ImGui::End();
@@ -94,12 +107,10 @@ namespace TEngine {
 				ImGui::Begin(item.first.c_str());
 				bool savePictur = false;
 				ImGui::Checkbox("save picture", &savePictur);
-				//text box
-				static char name[64] = ""; ImGui::InputText("saveName", name, 64);
 				if (savePictur)
 				{
 					savePictur = false;
-					item.second->SaverRenderFrame(name);
+					item.second->SaverRenderFrame(item.first);
 				}
 				item.second->GetColourTexture()->displayTexture();
 				ImGui::End();
@@ -110,7 +121,11 @@ namespace TEngine {
 #endif // DEBUG
 		
 		//TODO: Write Scene Hierachy
+		ImGui::Begin("Scene_Hierarchy");
+		auto lightManager = mScene->GetLightManager();
+		lightManager->OnGui();
 
+		ImGui::End();
 
 		
 		
