@@ -20,3 +20,6 @@
 #define SHADOWMAP_RESOLUTION_Y 2048
 #define SHADOWMAP_NEAR_PLANE 0.1f
 #define SHADOWMAP_FAR_PLANE 250.0f
+
+//drag ui speed
+#define DRAG_SPEED 0.01
