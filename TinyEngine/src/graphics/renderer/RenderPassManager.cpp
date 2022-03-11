@@ -1,8 +1,5 @@
-#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "RenderPassManager.h"
-#include "stb_image.h"
 #include "../../platform/window/WindowManager.h"
-#include "stb_image_write.h"
 #include "imgui/imgui.h"
 namespace TEngine {
 	RenderPassManager::RenderPassManager(Scene* scene) :
@@ -39,39 +36,6 @@ namespace TEngine {
 		outPutframeBuffer.insert({ "SSRPass_Output", ssrOutput.ssrFBO });
 		outPutframeBuffer.insert({ "FXAA_Output", fxaaOutput.fbo });
 		outPutframeBuffer.insert({ "Scene", mPS.GetFrameBuffer() });
-		
-	}
-	void RenderPassManager::SaverRenderFrame(const std::string& savePath)
-	{
-		int width = WindowManager::Instance()->GetWidth();
-		int height = WindowManager::Instance()->GetHeight();
-		WindowManager::Bind();
 
-		unsigned char* data = new unsigned char[width * height * 3];
-		glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
-
-		//for (int i = 0; i < width * height; i++)
-		//{
-		//	std::cout << (int)data[i * 3] << " " << (int)data[i * 3 + 1] << " " << (int)data[i * 3 + 2] << "\n";
-		//}
-
-		// flip texture
-		unsigned char* flippedData = new unsigned char[width * height * 3];
-		for (int i = 0; i < height; i++)
-		{
-			for (int j = 0; j < width; j++)
-			{
-				int index1 = (i * width + j) * 3;
-				int index2 = ((height - 1 - i) * width + j) * 3;
-				flippedData[index1] = data[index2];
-				flippedData[index1 + 1] = data[index2 + 1];
-				flippedData[index1 + 2] = data[index2 + 2];
-			}
-		}
-
-		stbi_write_png(savePath.c_str(), width, height,
-			3, flippedData, width * 3);
-
-		free(data);
 	}
 }

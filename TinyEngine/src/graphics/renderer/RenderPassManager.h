@@ -17,7 +17,7 @@ namespace TEngine {
 		~RenderPassManager();
 
 		void Render();
-		void SaverRenderFrame(const std::string& savePath);
+		void SaverRenderFrame(FrameBuffer* bindFrame ,const std::string& savePath);
 		std::unordered_map<std::string, FrameBuffer*>& GetFrameBuffers() { return outPutframeBuffer; }
 	private:
 		Scene* mScene;  // mScene's memory is managed outside
