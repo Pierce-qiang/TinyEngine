@@ -21,7 +21,7 @@ namespace TEngine {
 		virtual void Clear();
 		void Bind();
 		void UnBind();
-
+		void SaverRenderFrame(const std::string& savePath);
 		// getters
 		inline int GetWidth() { return mWidth; }
 		inline int GetHeight() { return mHeight; }
@@ -30,7 +30,7 @@ namespace TEngine {
 		inline unsigned int GetDepthStencilRBO() { return mDepthStencilRBO; }
 		inline Texture* GetColourTexture() { return &mColorTexture; }
 		inline Texture* GetDepthStencilTexture() { return &mDepthStencilTexture; }
-
+		
 	protected:
 		// framebuffer's property
 		unsigned int mFBO;

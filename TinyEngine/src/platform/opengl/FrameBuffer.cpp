@@ -1,4 +1,6 @@
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "FrameBuffer.h"
+#include "stb_image_write.h"
 #include <iostream>
 namespace TEngine {
 	FrameBuffer::FrameBuffer(int width, int height, bool isMultiSample) :
@@ -137,5 +139,39 @@ namespace TEngine {
 	void FrameBuffer::UnBind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+	void FrameBuffer::SaverRenderFrame(const std::string& saveName)
+	{
+		int width = mWidth;
+		int height = mHeight;
+		Bind();
+
+		unsigned char* data = new unsigned char[width * height * 3];
+		glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		//for (int i = 0; i < width * height; i++)
+		//{
+		//	std::cout << (int)data[i * 3] << " " << (int)data[i * 3 + 1] << " " << (int)data[i * 3 + 2] << "\n";
+		//}
+
+		// flip texture
+		unsigned char* flippedData = new unsigned char[width * height * 3];
+		for (int i = 0; i < height; i++)
+		{
+			for (int j = 0; j < width; j++)
+			{
+				int index1 = (i * width + j) * 3;
+				int index2 = ((height - 1 - i) * width + j) * 3;
+				flippedData[index1] = data[index2];
+				flippedData[index1 + 1] = data[index2 + 1];
+				flippedData[index1 + 2] = data[index2 + 2];
+			}
+		}
+
+		stbi_write_png(std::string(saveName+".jpg").c_str(), width, height,
+			3, flippedData, width * 3);
+
+		delete[] data;
+		delete[] flippedData;
 	}
 }
