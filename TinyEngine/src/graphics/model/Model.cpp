@@ -2,10 +2,11 @@
 #include <iostream>
 #include "../texture/TextureLoader.h"
 #include <assimp/postprocess.h>
+#include "AssimpGLMHelpers.h"
 namespace TEngine {
 	unsigned int Model::noNameNum = 0;
 
-	Model::Model(const std::string& path)
+	Model::Model(const std::string& path, bool hasBone /*= false*/):hasBone(hasBone)
 	{
 		LoadModel(path);
 	}
@@ -147,6 +148,7 @@ namespace TEngine {
 		}
 
 		Mesh newMesh(positions, uvs, normals, tangents, bitangents, indices);
+		if(hasBone) ExtractBoneWeights(newMesh, mesh);
 		newMesh.SetupMesh();
 
 		// process textures
@@ -230,5 +232,63 @@ namespace TEngine {
 		}
 		
 		
+	}
+
+	//Refer to learnopengl
+	void Model::ExtractBoneWeights(Mesh& newMesh, aiMesh* mesh) {
+		//init Bones
+		newMesh.mBoneIDs.reserve(newMesh.mPositions.size());
+		newMesh.mWeights.reserve(newMesh.mPositions.size());
+		for (int i = 0;i<newMesh.mPositions.size();i++)
+		{
+			for (int j =0;j<MAX_BONE_INFLUENCE;j++)
+			{
+				newMesh.mBoneIDs[i][j] = -1;
+				newMesh.mWeights[i][j] = 0.0f;
+			}
+		}
+
+		auto& boneInfoMap = mBoneInfoMap;
+		int& boneCount = mBoneCount;
+
+		for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+		{
+			int boneID = -1;
+			std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
+			if (boneInfoMap.find(boneName) == boneInfoMap.end())
+			{
+				BoneInfo boneInfo;
+				boneInfo.id = boneCount;
+				boneInfo.offset = glm::mat4(1.0f);
+				boneInfo.offset = AssimpGLMHelpers::ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix);
+				boneInfoMap[boneName] = boneInfo;
+				boneID = boneCount;
+				boneCount++;
+
+			}
+			else
+			{
+				boneID = boneInfoMap[boneName].id;
+			}
+			assert(boneID != -1);
+			auto weights = mesh->mBones[boneIndex]->mWeights;
+			int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+
+			for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+			{
+				int vertexId = weights[weightIndex].mVertexId;
+				float weight = weights[weightIndex].mWeight;
+				assert(vertexId <= newMesh.mPositions.size());
+				for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
+				{	//find a pos set value
+					if (newMesh.mBoneIDs[vertexId][i] < 0)
+					{
+						newMesh.mWeights[vertexId][i] = weight;
+						newMesh.mBoneIDs[vertexId][i] = boneID;
+						break;
+					}
+				}
+			}
+		}
 	}
 }

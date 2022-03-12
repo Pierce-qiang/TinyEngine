@@ -63,7 +63,20 @@ namespace TEngine {
 					data.push_back(mBitangents[i].y);
 					data.push_back(mBitangents[i].z);
 				}
-
+				if (mBoneIDs.size() > 0)
+				{
+					data.push_back(mBoneIDs[i].x);
+					data.push_back(mBoneIDs[i].y);
+					data.push_back(mBoneIDs[i].z);
+					data.push_back(mBoneIDs[i].w);
+				}
+				if (mWeights.size() > 0)
+				{
+					data.push_back(mWeights[i].x);
+					data.push_back(mWeights[i].y);
+					data.push_back(mWeights[i].z);
+					data.push_back(mWeights[i].w);
+				}
 			}
 		}
 		else
@@ -97,6 +110,16 @@ namespace TEngine {
 				data.push_back(mBitangents[i].y);
 				data.push_back(mBitangents[i].z);
 			}
+			for (unsigned int i = 0; i < mBoneIDs.size(); i++)
+			{
+				for (int j = 0; j < MAX_BONE_INFLUENCE; j++)
+					data.push_back(mBoneIDs[i][j]);
+			}
+			for (unsigned int i = 0; i < mWeights.size(); i++)
+			{
+				for (int j = 0; j < MAX_BONE_INFLUENCE; j++)
+					data.push_back(mWeights[i][j]);
+			}
 		}
 
 		// compute the component count
@@ -106,6 +129,8 @@ namespace TEngine {
 		if (mUVs.size() > 0)		bufferComponentCount += 2;
 		if (mTangents.size() > 0)	bufferComponentCount += 3;
 		if (mBitangents.size() > 0)	bufferComponentCount += 3;
+		if (mBoneIDs.size() > 0)	bufferComponentCount += 4;
+		if (mWeights.size() > 0)	bufferComponentCount += 4;
 
 		// setup vao, vbo and ebo
 		glGenVertexArrays(1, &mVAO);
@@ -157,6 +182,18 @@ namespace TEngine {
 				glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, stride, (void*)offset);
 				offset += 3 * sizeof(float);
 			}
+			if (mBoneIDs.size() > 0)
+			{
+				glEnableVertexAttribArray(5);
+				glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, stride, (void*)offset);
+				offset += 4 * sizeof(float);
+			}
+			if (mWeights.size() > 0)
+			{
+				glEnableVertexAttribArray(6);
+				glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, stride, (void*)offset);
+				offset += 4 * sizeof(float);
+			}
 
 		}
 		else
@@ -190,6 +227,18 @@ namespace TEngine {
 				glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (void*)offset);
 				offset += mBitangents.size() * 3 * sizeof(float);
 			}
+			if (mBoneIDs.size() > 0)
+			{
+				glEnableVertexAttribArray(5);
+				glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, (void*)offset);
+				offset += mBoneIDs.size() * 4 * sizeof(float);
+			}
+			if (mWeights.size() > 0)
+			{
+				glEnableVertexAttribArray(6);
+				glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 0, (void*)offset);
+				offset += mWeights.size() * 4 * sizeof(float);
+			}
 		}
 
 		glBindVertexArray(0);
@@ -205,5 +254,9 @@ namespace TEngine {
 			ImGui::TreePop();
 		}
 		
+	}
+	void Mesh::SetBoneInfluence(std::vector<glm::ivec4>& BoneID, std::vector<glm::vec4>& BoneWeight) {
+		mBoneIDs = BoneID;
+		mWeights = BoneWeight;
 	}
 }
