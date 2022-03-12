@@ -29,12 +29,11 @@ unsigned int planeVAO, planeVBO;
 
 
 
-
 int main()
 {
 	// Init
 	InputManager::Instance();
-	if (!WindowManager::Instance()->Init("TinyEngine", 1600, 900))
+	if (!WindowManager::Instance()->Init("TinyEngine", 800,600))
 	{
 		std::cout << "Could not initialize window class!\n";
 		glfwTerminate();
