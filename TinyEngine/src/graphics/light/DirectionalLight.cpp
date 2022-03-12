@@ -17,6 +17,6 @@ namespace TEngine {
 	}
 	void DirectionalLight::OnGui() {
 		BaseLight::OnGui();
-		ImGui::DragFloat3("Dir", glm::value_ptr(mLightDir), DRAG_SPEED,-1,1);
+		ImGui::DragFloat3("Dir",&mLightDir[0], DRAG_SPEED,-1,1);
 	}
 }
