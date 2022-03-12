@@ -128,4 +128,51 @@ namespace TEngine {
 		//else 
 		//	shader->SetUniform("hasDisplacement", false);
 	}
+	void Material::OnGui() {
+		//bad code smell, it's better to add name on Texture
+		if (mAlbedoMap)
+		{
+			if (ImGui::TreeNode("albedoMap"))
+			{
+				mAlbedoMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		if (mNormalMap) {
+			if (ImGui::TreeNode("normalMap"))
+			{
+				mNormalMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		if (mMetallicMap) {
+			if (ImGui::TreeNode("metalicMap"))
+			{
+				mMetallicMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		if (mRoughnessMap) {
+			if (ImGui::TreeNode("roughnessMap"))
+			{
+				mRoughnessMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		if (mAOMap) {
+			if (ImGui::TreeNode("aoMap"))
+			{
+				mAOMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		if (mMixtureMap) {
+			if (ImGui::TreeNode("mixtureMap"))
+			{
+				mMixtureMap->displayTexture();
+				ImGui::TreePop();
+			}
+		}
+		
+	}
 }

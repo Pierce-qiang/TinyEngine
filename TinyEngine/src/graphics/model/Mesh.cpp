@@ -194,4 +194,16 @@ namespace TEngine {
 
 		glBindVertexArray(0);
 	}
+	void Mesh::OnGui() {
+		
+		//later maybe show pos, normal uv?
+
+		//show material
+		if (ImGui::TreeNode("Material"))
+		{
+			mMaterial.OnGui();
+			ImGui::TreePop();
+		}
+		
+	}
 }

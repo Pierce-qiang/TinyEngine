@@ -17,6 +17,7 @@ namespace TEngine {
 		~Mesh();
 
 		void Draw() const;
+		void OnGui();
 
 		inline bool HasTangents() const { return mTangents.size() > 0; }
 

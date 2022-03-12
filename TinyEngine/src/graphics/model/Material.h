@@ -1,5 +1,6 @@
 #pragma once
-
+#include "imgui/imgui.h"
+#include "../../macros.h"
 #include "../texture/Texture.h"
 #include "../Shader.h"
 namespace TEngine {
@@ -12,6 +13,7 @@ namespace TEngine {
 
 		void SeperateMixture();
 		void BindMaterial(Shader* shader) const;
+		void OnGui();
 
 		inline void SetAlbedoMap(Texture* texture) { mAlbedoMap = texture; }
 		inline void SetNormalMap(Texture* texture) { mNormalMap = texture; }

@@ -3,6 +3,8 @@
 #include "../texture/TextureLoader.h"
 #include <assimp/postprocess.h>
 namespace TEngine {
+	unsigned int Model::noNameNum = 0;
+
 	Model::Model(const std::string& path)
 	{
 		LoadModel(path);
@@ -11,11 +13,17 @@ namespace TEngine {
 	Model::Model(const Mesh& mesh)
 	{
 		mMeshes.push_back(mesh);
+		mName = "None_";
+		mName += std::to_string(noNameNum);
+		noNameNum++;
 	}
 
 	Model::Model(const std::vector<Mesh>& meshes)
 	{
 		mMeshes = meshes;
+		mName = "None_";
+		mName += std::to_string(noNameNum);
+		noNameNum++;
 	}
 
 	Model::~Model()
@@ -60,6 +68,7 @@ namespace TEngine {
 		}
 
 		mDirectory = path.substr(0, path.find_last_of('/'));
+		mName = mDirectory.substr(mDirectory.find_last_of('/')+1, mDirectory.size());
 
 		ProcessNode(scene->mRootNode, scene);
 	}
@@ -198,5 +207,28 @@ namespace TEngine {
 		}
 
 		return nullptr;
+	}
+
+	void Model::OnGui() {
+		//ImGui::Text(mDirectory.c_str());
+
+		ImGui::Text((std::string("Center: (") + std::to_string(mCenter.x) + ", " + std::to_string(mCenter.y) + ", " + std::to_string(mCenter.z) + " )").c_str());
+		ImGui::DragFloat3("Pos", &mPosition[0], DRAG_SPEED);
+		ImGui::DragFloat3("Scale", &mScale[0], DRAG_SPEED);
+		ImGui::DragFloat("Rotate_Angle", &mRotation, DRAG_SPEED*10, -180, 180);
+		ImGui::DragFloat3("RotateAxis", &mRotateAxis[0], DRAG_SPEED,-1,1);
+		if (ImGui::TreeNode("Meshes"))
+		{
+			for (int i = 0; i < mMeshes.size(); i++) {
+				if (ImGui::TreeNode((std::string("mesh_") + std::to_string(i)).c_str()))
+				{
+					mMeshes[i].OnGui();
+					ImGui::TreePop();
+				}
+			}
+			ImGui::TreePop();
+		}
+		
+		
 	}
 }
