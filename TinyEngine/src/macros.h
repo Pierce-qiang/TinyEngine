@@ -23,3 +23,6 @@
 
 //drag ui speed
 #define DRAG_SPEED 0.01
+
+//Bone setting. Never change, the code is coupled hard to change
+#define MAX_BONE_INFLUENCE 4
