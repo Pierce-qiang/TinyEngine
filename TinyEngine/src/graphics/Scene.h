@@ -24,7 +24,7 @@ namespace TEngine {
 		inline Skybox* GetSkybox() { return mSkybox; }
 		inline ModelRenderer* GetModelRenderer() { return mModelRenderer; }
 		inline LightManager* GetLightManager() { return mLightManager; }
-
+		inline std::vector<Model*>& GetModels() { return mModels; }
 	public:
 		void Init(int sceneID);
 

@@ -12,7 +12,6 @@ namespace TEngine {
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		//io.ConfigViewportsNoAutoMerge = true;
 		//io.ConfigViewportsNoTaskBarIcon = true;
 
@@ -122,8 +121,25 @@ namespace TEngine {
 		
 		//TODO: Write Scene Hierachy
 		ImGui::Begin("Scene_Hierarchy");
+
+		//all kinds of light
 		auto lightManager = mScene->GetLightManager();
 		lightManager->OnGui();
+
+		//model
+		if (ImGui::TreeNode("Models"))
+		{
+			auto models = mScene->GetModels();
+			for (auto& model:models)
+			{
+				if (ImGui::TreeNode(model->GetName().c_str())) {
+					model->OnGui();
+					ImGui::TreePop();
+				}
+			}
+			ImGui::TreePop();
+		}
+		
 
 		ImGui::End();
 
