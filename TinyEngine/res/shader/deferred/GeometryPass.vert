@@ -4,7 +4,12 @@ layout(location = 1) in vec3 aNormal;
 layout(location = 2) in vec2 aTexCoord;
 layout(location = 3) in vec3 aTangent;
 layout(location = 4) in vec3 aBiTangent;
+layout(location = 5) in ivec4 boneIds; 
+layout(location = 6) in vec4 weights;
 
+const int MAX_BONES = 100;
+const int MAX_BONE_INFLUENCE = 4;
+uniform mat4 finalBonesMatrices[MAX_BONES];
 
 out vec3 fragPos;
 out mat3 TBN;
@@ -18,14 +23,29 @@ uniform mat3 normalMatrix;
 
 void main()
 {
-	vec3 T = normalize(normalMatrix * aTangent);
-	vec3 B = normalize(normalMatrix * aBiTangent);
-	vec3 N = normalize(normalMatrix * aNormal);
+	mat4 totalTransform = mat4(0.0);
+    for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
+    {
+        if(boneIds[i] == -1) 
+            continue;
+        if(boneIds[i] >=MAX_BONES) 
+        {
+           	totalTransform = mat4(1.0);
+            break;
+        }
+        totalTransform += finalBonesMatrices[boneIds[i]] * weights[i];
+   }
 
-	fragPos = vec3(model * vec4(aPos, 1.0));
+	fragPos = vec3(model * totalTransform * vec4(aPos, 1.0));
+	mat3 normalMat = mat3(transpose(inverse(model * totalTransform)));
+
+	vec3 T = normalize(normalMat * aTangent);
+	vec3 B = normalize(normalMat * aBiTangent);
+	vec3 N = normalize(normalMat * aNormal);
+
 	TBN = mat3(T,B,N);
 	baseNormal = N;
 	texCoords = aTexCoord;
 
-	gl_Position = projection * view * model * vec4(aPos, 1.0f);
+	gl_Position = projection * view * vec4(fragPos, 1.0f);
 }
