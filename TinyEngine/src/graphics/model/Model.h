@@ -5,15 +5,8 @@
 #include "Mesh.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
+#include "Animator.h"
 namespace TEngine {
-	struct BoneInfo 
-	{
-		int id;
-		//change model space to this bone space
-		glm::mat4 offset;
-	};
-
-
 	class Model
 	{
 	public:
@@ -25,6 +18,7 @@ namespace TEngine {
 		void Init();
 		void Draw(Shader* shader, bool isUseMaterial) const;
 		void OnGui();
+		void LoadAnimation(std::string animationPath);
 
 		// Getters and Setters
 		inline const glm::vec3& GetCenter() const { return mCenter; }
@@ -52,6 +46,8 @@ namespace TEngine {
 		void ExtractBoneWeights(Mesh& newMesh, aiMesh* mesh);
 
 	private:
+		Animation* mAnimation;
+		Animator* mAnimator;
 		std::vector<Mesh> mMeshes;
 		std::unordered_map<std::string, BoneInfo> mBoneInfoMap;
 		std::string mDirectory;

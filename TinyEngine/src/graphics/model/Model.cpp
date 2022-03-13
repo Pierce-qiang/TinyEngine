@@ -3,6 +3,7 @@
 #include "../texture/TextureLoader.h"
 #include <assimp/postprocess.h>
 #include "AssimpGLMHelpers.h"
+#include "../../platform/window/WindowManager.h"
 namespace TEngine {
 	unsigned int Model::noNameNum = 0;
 
@@ -11,7 +12,7 @@ namespace TEngine {
 		LoadModel(path);
 	}
 
-	Model::Model(const Mesh& mesh)
+	Model::Model(const Mesh& mesh) : hasBone(false)
 	{
 		mMeshes.push_back(mesh);
 		mName = "None_";
@@ -19,7 +20,7 @@ namespace TEngine {
 		noNameNum++;
 	}
 
-	Model::Model(const std::vector<Mesh>& meshes)
+	Model::Model(const std::vector<Mesh>& meshes):hasBone(false)
 	{
 		mMeshes = meshes;
 		mName = "None_";
@@ -38,8 +39,15 @@ namespace TEngine {
 
 	void Model::Draw(Shader* shader, bool isUseMaterial) const
 	{
+		if (hasBone&&mAnimation&&mAnimator)
+		{
+			mAnimator->UpdateAnimation(WindowManager::GetDeltaTime());
+			mAnimator->SetFinalBoneMatrices(shader);
+		}
+
 		for (unsigned int i = 0; i < mMeshes.size(); ++i)
 		{
+
 			if (isUseMaterial)
 			{
 				mMeshes[i].mMaterial.BindMaterial(shader);
@@ -79,7 +87,7 @@ namespace TEngine {
 	void Model::ProcessNode(aiNode* node, const aiScene* scene)
 	{
 		// process all the node's meshes (if any)
-		for (unsigned int i = 0; i < node->mNumMeshes; i++)
+		for (size_t i = 0; i < node->mNumMeshes; i++)
 		{
 			// each node has an array of mesh indices, use these indices to get the meshes from the scene
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
@@ -87,7 +95,7 @@ namespace TEngine {
 		}
 
 		// then do the same for each of its children
-		for (unsigned int i = 0; i < node->mNumChildren; i++)
+		for (size_t i = 0; i < node->mNumChildren; i++)
 		{
 			ProcessNode(node->mChildren[i], scene);
 		}
@@ -148,7 +156,8 @@ namespace TEngine {
 		}
 
 		Mesh newMesh(positions, uvs, normals, tangents, bitangents, indices);
-		if(hasBone) ExtractBoneWeights(newMesh, mesh);
+		if(hasBone) 
+			ExtractBoneWeights(newMesh, mesh);
 		newMesh.SetupMesh();
 
 		// process textures
@@ -239,19 +248,16 @@ namespace TEngine {
 		//init Bones
 		newMesh.mBoneIDs.reserve(newMesh.mPositions.size());
 		newMesh.mWeights.reserve(newMesh.mPositions.size());
-		for (int i = 0;i<newMesh.mPositions.size();i++)
+		for (unsigned int i = 0;i<newMesh.mPositions.size();i++)
 		{
-			for (int j =0;j<MAX_BONE_INFLUENCE;j++)
-			{
-				newMesh.mBoneIDs[i][j] = -1;
-				newMesh.mWeights[i][j] = 0.0f;
-			}
+			newMesh.mBoneIDs.push_back(glm::ivec4(-1));
+			newMesh.mWeights.push_back(glm::vec4(0.0));
 		}
 
 		auto& boneInfoMap = mBoneInfoMap;
 		int& boneCount = mBoneCount;
 
-		for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+		for (unsigned int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
 		{
 			int boneID = -1;
 			std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
@@ -274,12 +280,12 @@ namespace TEngine {
 			auto weights = mesh->mBones[boneIndex]->mWeights;
 			int numWeights = mesh->mBones[boneIndex]->mNumWeights;
 
-			for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+			for (unsigned int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
 			{
 				int vertexId = weights[weightIndex].mVertexId;
 				float weight = weights[weightIndex].mWeight;
 				assert(vertexId <= newMesh.mPositions.size());
-				for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
+				for (unsigned int i = 0; i < MAX_BONE_INFLUENCE; ++i)
 				{	//find a pos set value
 					if (newMesh.mBoneIDs[vertexId][i] < 0)
 					{
@@ -290,5 +296,11 @@ namespace TEngine {
 				}
 			}
 		}
+	}
+
+	void Model::LoadAnimation(std::string animationPath) {
+		assert(hasBone);
+		mAnimation = new Animation(animationPath, mBoneInfoMap, mBoneCount);
+		mAnimator = new Animator(mAnimation);
 	}
 }
