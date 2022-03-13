@@ -21,14 +21,15 @@ namespace TEngine {
 		// it's a simple test now
 		//ShadowmapPassOutput smOutput = mShadowmapPass.Render();
 		//mFowardLightingPass.Render(smOutput, true);
+		//outPutframeBuffer.insert({ "ShadowMap_Output", smOutput.shadowmapFramebuffer });
+		//outPutframeBuffer.insert({ "Scene", mFowardLightingPass.GetFrameBuffer() });
+
 
 		ShadowmapPassOutput smOutput = mShadowmapPass.Render();
 		GeometryPassOutput gOutput = mDeferredGeometryPass.Render();
 		LightingPassOutput lightOutput = mDeferredLightingPass.Render(gOutput, smOutput);
 		SSRPassOutput ssrOutput = mSSRPass.Render(gOutput, lightOutput);
 		PostProcessOutput fxaaOutput = mFXAAPass.Render(lightOutput);
-
-		//mPS.Render(gOutput, lightOutput.deferredLightingFBO, ssrOutput);
 		mPS.Render(gOutput, fxaaOutput.fbo, ssrOutput, smOutput);
 		outPutframeBuffer.insert({ "ShadowMap_Output", smOutput.shadowmapFramebuffer });
 		outPutframeBuffer.insert({ "GeometryPass_Output", gOutput.outputGBuffer });

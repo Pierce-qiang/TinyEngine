@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "model/shapes/Sphere.h"
 #include "texture/TextureLoader.h"
+#include "../platform/window/WindowManager.h"
 namespace TEngine {
 	Scene::Scene(int sceneID) :
 		mCamera(new Camera()),
@@ -23,8 +24,9 @@ namespace TEngine {
 
 	void Scene::ProcessInput(float deltaTime)
 	{
-		// just process the user's input now
+		// just process the user's input
 		mCamera->ProcessInput(deltaTime);
+		WindowManager::SetDeltaTime(deltaTime);
 	}
 
 	void Scene::AddModelsToRender()
@@ -44,12 +46,15 @@ namespace TEngine {
 		//Model* gun = new Model("res/cerberus/meshes/cerberus.obj");
 		//Model* sponza = new Model("res/sponza/sponza.obj");
 		//Model* gameboy = new Model("res/gameboy/scene.gltf");
-		Model* vikingsword = new Model("res/vikingsword/scene.gltf");
+		//Model* vikingsword = new Model("res/vikingsword/scene.gltf");
 		//Model* chess = new Model("res/Chess/scene.gltf");
-
+		Model* vampir = new Model("res/vampire/dancing_vampire.dae", true);
+		vampir->LoadAnimation("res/vampire/dancing_vampire.dae");
+		vampir->SetScale(glm::vec3(0.05f));
+		mModels.push_back(vampir);
 		//mModels.push_back(gameboy);
 		//mModels.push_back(chess);
-		mModels.push_back(vikingsword);
+		//mModels.push_back(vikingsword);
 		mModels.push_back(sphere1);
 		mModels.push_back(cube1);
 		mModels.push_back(cube2);
@@ -62,16 +67,18 @@ namespace TEngine {
 		//Model* sphere2 = new Model(Sphere());
 		//mModels.push_back(sphere1);
 		//mModels.push_back(sphere2);
+		// 
+		// 
 		//chess->SetPosition(glm::vec3(5.0, 5.0f, 5.0f));
 		//chess->SetScale(glm::vec3(0.035f, 0.035f, 0.035f));
-		vikingsword->SetPosition(glm::vec3(5.0, 5.0f, 0.0f));
-		vikingsword->SetScale(glm::vec3(0.035f, 0.035f, 0.035f));
+		//vikingsword->SetPosition(glm::vec3(5.0, 5.0f, 0.0f));
+		//vikingsword->SetScale(glm::vec3(0.035f, 0.035f, 0.035f));
 		//gameboy->SetPosition(glm::vec3(0.0, 5.0f, 0.0f));
 		//gameboy->SetScale(glm::vec3(0.015f, 0.015f, 0.015f));
 		sphere1->SetPosition(glm::vec3(0.0, 3.0f, 0.0f));
 		cube1->SetPosition(glm::vec3(7.0, 3.0f, -49.0f));
 		//cube1->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
-		cube2->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
+		cube2->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 		cube2->SetScale(glm::vec3(30.0f, 1.0f, 30.0f));
 		cube3->SetPosition(glm::vec3(1.0f, 3.0f, 3.0f));
 		cube3->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
@@ -94,7 +101,7 @@ namespace TEngine {
 		gun->GetMesh(0)->GetMaterial()->SetMetallicMap(TextureLoader::Load2DTexture("res/cerberus/materials/cerberus_metal.png"));
 		gun->GetMesh(0)->GetMaterial()->SetAmbientOcclusionMap(TextureLoader::Load2DTexture("res/cerberus/materials/cerberus_ao.png"));*/
 
-
+		
 		//TODO: skybox
 		std::vector<std::string> skyboxFilePaths;
 		skyboxFilePaths.push_back("res/skybox/right.png");

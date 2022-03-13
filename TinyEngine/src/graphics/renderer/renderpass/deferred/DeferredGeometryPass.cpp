@@ -42,6 +42,8 @@ namespace TEngine {
 		// set view, projection matrix, note the model matrix is set in modelrenderer
 		mGeometryShader->SetUniform("view", camera->GetViewMatrix());
 		mGeometryShader->SetUniform("projection", camera->GetProjectionMatrix());
+		
+
 
 		// add models to renderer
 		mScene->AddModelsToRender();
