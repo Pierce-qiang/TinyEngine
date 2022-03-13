@@ -6,7 +6,7 @@
 namespace TEngine {
 	//static member data must init
 	WindowManager* WindowManager::sInstance = nullptr;
-
+	float WindowManager::deltaTime = 0.0f;
 	WindowManager::WindowManager(){}
 
 	WindowManager::~WindowManager(){}

@@ -21,7 +21,8 @@ namespace TEngine {
 		void ReleaseResource();
 		static void Clear();	// clear depth, color and stencil buffer
 		static void Bind();		// bind the default framebuffer
-
+		static void SetDeltaTime(float delTime) { deltaTime = delTime; }
+		static float GetDeltaTime() { return deltaTime; }
 	private:
 		WindowManager();
 		static WindowManager* sInstance;
@@ -40,6 +41,8 @@ namespace TEngine {
 		const char* mTitle;
 		int mWidth, mHeight;
 		bool mHideCursor;
+		
+		static float deltaTime;
 
 		GLFWwindow* mWindow;
 	};
