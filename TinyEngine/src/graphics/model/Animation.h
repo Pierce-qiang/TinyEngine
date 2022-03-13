@@ -7,6 +7,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include "../../macros.h"
+#include "imgui/imgui.h"
 namespace TEngine {
 	struct BoneInfo
 	{
@@ -20,6 +21,17 @@ namespace TEngine {
 		std::string name;
 		int childrenCount;
 		std::vector<AssimpNodeData> children;
+		void OnGUI() const {
+			if (ImGui::TreeNode(name.c_str()))
+			{
+				for (size_t i = 0; i < childrenCount; i++)
+				{
+					children[i].OnGUI();
+				}
+				ImGui::TreePop();
+			}
+			
+		}
 	};
 
 	class Animation

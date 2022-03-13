@@ -239,7 +239,14 @@ namespace TEngine {
 			}
 			ImGui::TreePop();
 		}
-		
+		if (hasBone&&mAnimation)
+		{
+			if (ImGui::TreeNode("Show Skeleton"))
+			{
+				mAnimation->GetRootNode().OnGUI();
+				ImGui::TreePop();
+			}
+		}
 		
 	}
 

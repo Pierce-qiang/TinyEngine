@@ -1,6 +1,6 @@
 #include "GuiManager.h"
 #include <unordered_map>
-
+#include "../macros.h"
 namespace TEngine {
 	GuiManager::GuiManager(Scene* scene, RenderPassManager* renderPassManager) :mScene(scene), mRenderpassManager(renderPassManager) {
 #pragma region imgui
@@ -62,7 +62,6 @@ namespace TEngine {
 			outputBuffers.erase(ScneBufferIte->first);
 		}
 
-//#define DEBUG
 #ifdef DEBUG
 		//bad smell code...
 #pragma region drawBufferTextures
