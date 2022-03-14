@@ -28,7 +28,7 @@ A tiny game engine based on opengl (Not Finished)
  - Create Lights in graphics/light/LightManager.cpp InitBasicLights()
  - Create Models in graphics/Scene.cpp init
  - If you want to enable SSR please edit in PassThrough.frag
-
+ - The Sponza resource is too big, I don't upload
 ## Show some result
  - Simple GUI
 ![GUI](./image/gui.jpg)
