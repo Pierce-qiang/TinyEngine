@@ -144,6 +144,15 @@
     <ClCompile Include="src\graphics\GuiManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\model\Animator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\model\Animation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\model\Bone.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vendor\stb_image.h">
@@ -248,9 +257,6 @@
     <ClInclude Include="src\graphics\renderer\RenderPassManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\stb_image_write.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="vendor\imgui\imconfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -279,6 +285,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\GuiManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\stb_image_write.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\model\AssimpGLMHelpers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\model\Animator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\model\Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\model\Bone.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -163,6 +163,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\model\Bone.cpp" />
+    <ClCompile Include="src\graphics\model\Animation.cpp" />
+    <ClCompile Include="src\graphics\model\Animator.cpp" />
     <ClCompile Include="src\graphics\GuiManager.cpp" />
     <ClCompile Include="src\graphics\renderer\RenderPassManager.cpp" />
     <ClCompile Include="src\graphics\renderer\renderpass\postprocess\FXAAPass.cpp" />
@@ -208,7 +211,11 @@
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\model\Bone.h" />
+    <ClInclude Include="src\graphics\model\Animation.h" />
+    <ClInclude Include="src\graphics\model\Animator.h" />
     <ClInclude Include="src\graphics\GuiManager.h" />
+    <ClInclude Include="src\graphics\model\AssimpGLMHelpers.h" />
     <ClInclude Include="src\graphics\renderer\RenderPassManager.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\postprocess\FXAAPass.h" />
     <ClInclude Include="src\graphics\renderer\renderpass\postprocess\PassThroughPass.h" />

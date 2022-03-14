@@ -23,7 +23,7 @@ A tiny game engine based on opengl (Not Finished)
 ## User Guide
 Camera Control: W/S/A/D/Q/E  forward / back / left / right / up / down
 H -> hide mouse cursor
-If you want to show different pass texture, please define DEBUG in GuiManager.cpp Draw function
+If you want to show different pass texture, please define DEBUG in macro.h
 
 ## Problem encountered:
  - PCSS may light leaking, we should avoid higher object hiding lower object in shadow map space. 
