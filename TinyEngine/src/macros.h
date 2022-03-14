@@ -27,3 +27,5 @@
 //Bone setting. Never change, the code is coupled hard to change
 #define MAX_BONE_INFLUENCE 4
 #define MAX_BONES 100
+
+#define DEBUG

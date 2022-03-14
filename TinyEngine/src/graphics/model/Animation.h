@@ -30,7 +30,6 @@ namespace TEngine {
 				}
 				ImGui::TreePop();
 			}
-			
 		}
 	};
 
