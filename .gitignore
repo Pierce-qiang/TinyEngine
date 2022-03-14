@@ -35,8 +35,8 @@
 /TinyEngine/vendor/*
 /TinyEngine/Debug/*
 /TinyEngine/.vs/*
-/TinyEngine/res/cerberus*
-/TinyEngine/res/Chess*
-/TinyEngine/res/gameboy*
+#/TinyEngine/res/cerberus*
+#/TinyEngine/res/Chess*
+#/TinyEngine/res/gameboy*
+#/TinyEngine/res/vikingsword*
 /TinyEngine/res/Sponza*
-/TinyEngine/res/vikingsword*
