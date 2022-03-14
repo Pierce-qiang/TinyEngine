@@ -1,0 +1,11 @@
+Model Information:
+* title:	Game Boy Classic
+* source:	https://sketchfab.com/3d-models/game-boy-classic-0ae80019e6f046168923286d7e628f6f
+* author:	Georg Klein (https://sketchfab.com/kleingeo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Game Boy Classic" (https://sketchfab.com/3d-models/game-boy-classic-0ae80019e6f046168923286d7e628f6f) by Georg Klein (https://sketchfab.com/kleingeo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
