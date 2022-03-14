@@ -42,7 +42,7 @@ namespace TEngine {
 	}
 	void GuiManager::Draw() {
 		PrepareFrame();
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 		//TODO: Write Gui logic------------------------
 
 		//Draw Scene Texture

@@ -33,7 +33,7 @@ int main()
 {
 	// Init
 	InputManager::Instance();
-	if (!WindowManager::Instance()->Init("TinyEngine", 800,600))
+	if (!WindowManager::Instance()->Init("TinyEngine", 1440,900))
 	{
 		std::cout << "Could not initialize window class!\n";
 		glfwTerminate();
