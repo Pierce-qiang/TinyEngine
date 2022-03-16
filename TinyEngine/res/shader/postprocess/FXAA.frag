@@ -44,7 +44,7 @@ void main()
 
 	// Perform the samples and calculate the new texel colour
 	vec3 rgbA = 0.5 * (texture2D(inputTexture, texCoord + dir * ((1.0 / 3.0) - 0.5)).xyz + texture2D(inputTexture, texCoord + dir * ((2.0 / 3.0) - 0.5)).xyz);
-	vec3 rgbB = rgbA * 0.5 + 0.25 * (texture2D(inputTexture, texCoord + dir * - 0.5).xyz + texture2D(inputTexture, texCoord + dir * 0.5).xyz);
+	vec3 rgbB = rgbA * 0.5 + 0.25 * (texture2D(inputTexture, texCoord + dir * 0.5).xyz + texture2D(inputTexture, texCoord + dir * 0.5).xyz);
 	
 	float lumaB = dot(rgbB, calculateLuma);
 	if ((lumaB < lumaMin) || (lumaB > lumaMax))  // if blur too much in rgbB, we use rgbA
